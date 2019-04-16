@@ -14,7 +14,6 @@ firebase.initializeApp(config);
 
 data = firebase.database();
 
-
 var inputCity;
 var inputState;
 var inputCountry;
@@ -27,12 +26,12 @@ $(function activatePlacesSearch(){
     var autocomplete = new google.maps.places.Autocomplete(input);
 });
 
-function searchInput() {
+function searchInput(event) {
+    event.preventDefault();
     currentDest = $("#searchBar").val();
     $("#searchBar").text('');
     splitCurrentDest = currentDest.split(' ');
     console.log(splitCurrentDest);
- 
 
     if (splitCurrentDest.length == 3) {
         inputCity = splitCurrentDest[0];
@@ -42,7 +41,6 @@ function searchInput() {
         inputCity = splitCurrentDest[0];
         inputState = null;
         inputCountry = splitCurrentDest[1];
-
     } else if (splitCurrentDest.length == 4) {
         inputCity = splitCurrentDest[0] + " " + splitCurrentDest[1];
         inputState = splitCurrentDest[2];
@@ -59,8 +57,7 @@ function searchInput() {
         // latitude: inputLat,
         // longitude: inputLong
     }
-    
-
+  
     data.ref().push(newSearch);
     console.log("City: " + newSearch.city);
     console.log("State " + newSearch.state);
