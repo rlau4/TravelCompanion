@@ -19,6 +19,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCbNdmkdcQobjxv3AtaJWu9aZ6DsAsRJNQ&libraries=places&callback=initMap" async defer></script>
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css" />
     
 </head>
@@ -42,7 +43,7 @@
                     <div class="form-group">
                         <input type="text" class="form-control" id="searchBar" placeholder="City, Country or Zip">
                     </div>
-                    <button type="submit" class="btn btn-primary">Search</button>
+                    <button type="submit" id ="submit" class="btn btn-primary">Search</button>
                 </form>
                 <br>
                 <div id="topSearch">
@@ -62,8 +63,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6 col-md-6">
-                <img src="https://www.3u.com//upload/20171222/1513913299933046797.jpg" id="imgP">
+            <div id = "map" class="col-lg-6 col-md-6">
+                <!--img src="https://www.3u.com//upload/20171222/1513913299933046797.jpg" id="imgP">-->
             </div>
         </div>
         <br>
