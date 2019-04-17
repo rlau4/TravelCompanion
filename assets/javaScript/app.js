@@ -62,6 +62,9 @@ function searchInput(event) {
     console.log("City: " + newSearch.city);
     console.log("State " + newSearch.state);
     console.log("country:" + newSearch.country);
+
+    pushIntoPopularArray();
+    console.log(popularArr);
 };
 
 $("#search").on("click", searchInput);
@@ -70,5 +73,6 @@ $("#search").on("click", searchInput);
 
 //push cities/states into popularArr array
 function pushIntoPopularArray() {
-    
+ popularArr.push(inputCity + inputState + inputCountry);
 }
+
