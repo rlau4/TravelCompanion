@@ -18,5 +18,23 @@ function initMap() {
         scaleControl: true,
         fullscreenControl: true,
       });
-}
+      var geocoder = new google.maps.Geocoder();
 
+      document.getElementById('submit').addEventListener('click', function(){ 
+        geocodeAddress(geocoder, map);
+      });
+};
+
+
+function mapSearch(){
+    new google.maps.places.Autocomplete(
+        (document.getElementById('searchBar')),{
+            types: ['geocode']
+        }
+    );
+};
+
+$(document).ready(function() {
+    initMap();
+    mapSearch();
+});
