@@ -1,4 +1,4 @@
-var recentArr = [];
+var popularArr = [];
 var currentDest = "HERE";
 
 // Initialize Firebase
@@ -65,3 +65,10 @@ function searchInput(event) {
 };
 
 $("#search").on("click", searchInput);
+
+
+
+//push cities/states into popularArr array
+function pushIntoPopularArray() {
+    
+}
