@@ -79,9 +79,10 @@ $(document).ready(function() {
     // });
 // Original Search Bar
     $(".btn1").click(function(){
-        $(".input").toggleClass("active").focus;
-        $(this).toggleClass("animate");
+        $(".input").addClass("active").focus;
+        $(this).addClass("animate");
         $(".input").val("");
+
     });
 
 // Hiding and showing elements on search
