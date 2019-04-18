@@ -21,18 +21,18 @@ var inputLat;
 var inputLong;
 
 // Google Places API
-$(function activatePlacesSearch(){
+$(function activatePlacesSearch() {
     var input = document.getElementById('searchBar');
     var autocomplete = new google.maps.places.Autocomplete(input);
 });
 
-function searchInput(event) {
-    event.preventDefault();
+function searchInput() {
     currentDest = $("#searchBar").val();
     $("#searchBar").text('');
     splitCurrentDest = currentDest.split(' ');
     console.log(splitCurrentDest);
 
+    //splits user input into strings for each word seperating city, state, and country
     if (splitCurrentDest.length == 3) {
         inputCity = splitCurrentDest[0];
         inputState = splitCurrentDest[1];
@@ -50,6 +50,8 @@ function searchInput(event) {
        inputState = splitCurrentDest[3];
        inputCountry = splitCurrentDest[4];
     }
+
+    //variable for pushing to firebase
     newSearch = {
         city: inputCity,
         state: inputState,
@@ -57,25 +59,77 @@ function searchInput(event) {
         // latitude: inputLat,
         // longitude: inputLong
     }
-  
+
+  //push to firebase
     data.ref().push(newSearch);
     console.log("City: " + newSearch.city);
     console.log("State " + newSearch.state);
     console.log("country:" + newSearch.country);
-
-    pushIntoPopularArray();
+    popularArr.push(newSearch.city);
+    // pushIntoPopularArray();
     console.log(popularArr);
 };
 
-$("#search").on("click", searchInput);
+$("#submit").on("click", searchInput);
+
+data.ref().orderByChild("dateAdded").on("child_added", function(snapshot) {
+    
+    arrayCity = snapshot.val().city;
+    arrayState = snapshot.val().state;
+    arrayCountry = snapshot.val().country;
+    
+    if (arrayState == null) {
+    popularArr.push(arrayCity + " " + arrayCountry);
+    } else { 
+        popularArr.push(arrayCity + " " + arrayState + " " + arrayCountry);
+    }
+    for (i = 0; i < 5; i++) {
+        var popularDest = $("<p>").text(popularArr[i]);
+        $("#top-search").append(popularDest);
 
 
+    }
 
+});
 //push cities/states into popularArr array
-function pushIntoPopularArray() {
- popularArr.push(inputCity + inputState + inputCountry);
-}
+// function pushIntoPopularArray() {
+//  popularArr.push(newSearch.city);
+// }
 
+//Map API call
+
+var map;
+var service;
+var infowindow;
+
+function initMap() {
+    map = new google.maps.Map(document.getElementById('map'), {
+        center: {lat: -34.397, lng: 150.644},
+        zoom: 8,
+        zoomControl: true,
+        scaleControl: true,
+        fullscreenControl: true,
+      });
+      var geocoder = new google.maps.Geocoder();
+
+      document.getElementById('submit').addEventListener('click', function(){ 
+        geocodeAddress(geocoder, map);
+      });
+};
+
+
+function mapSearch(){
+    new google.maps.places.Autocomplete(
+        (document.getElementById('searchBar')),{
+            types: ['geocode']
+        }
+    );
+};
+
+$(document).ready(function() {
+    initMap();
+    mapSearch();
+});
     $(function activatePlacesSearch(){
         var input = document.getElementById('searchBar');
         var autocomplete = new google.maps.places.Autocomplete(input);
