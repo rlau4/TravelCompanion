@@ -107,7 +107,7 @@ $("#searchForm").submit(function(e) {
 //--<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css" />
 $(document).ready(function () {
     var articles = $('.articles');
-    var input = $('#input').val();
+    var input = $('#searchBar').val();
     var toSearch = '';
     var button = $('button');
     var searchUrl = 'https://en.wikipedia.org/api/rest_v1/page/summary/' + input;
