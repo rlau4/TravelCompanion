@@ -94,3 +94,12 @@
   #searchBar2[type=text]:focus {
     width: 100%;
   }
+
+#mapDiv {
+  height: 500px;
+  width: 100%;
+}
+
+#map {
+  height: 100%;
+}
