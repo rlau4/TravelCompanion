@@ -22,13 +22,13 @@ var inputLong;
 
 // Google Places API
 $(function activatePlacesSearch() {
-    var input = document.getElementById('searchBar');
+    var input = document.getElementById('searchBar2');
     var autocomplete = new google.maps.places.Autocomplete(input);
 });
 
 function searchInput() {
-    currentDest = $("#searchBar").val();
-    $("#searchBar").text('');
+    currentDest = $("searchBar2").val();
+    $("searchBar2").text('');
     splitCurrentDest = currentDest.split(' ');
     console.log(splitCurrentDest);
 
@@ -66,12 +66,12 @@ function searchInput() {
     console.log("State " + newSearch.state);
     console.log("country:" + newSearch.country);
     popularArr.push(newSearch.city);
-    // pushIntoPopularArray();
-    console.log(popularArr);
 };
 
 $("#submit").on("click", searchInput);
 
+
+//populate top searches array and html list
 data.ref().orderByChild("dateAdded").on("child_added", function(snapshot) {
     
     arrayCity = snapshot.val().city;
@@ -83,18 +83,16 @@ data.ref().orderByChild("dateAdded").on("child_added", function(snapshot) {
     } else { 
         popularArr.push(arrayCity + " " + arrayState + " " + arrayCountry);
     }
+  
     for (i = 0; i < 5; i++) {
-        var popularDest = $("<p>").text(popularArr[i]);
+        $("top-item").remove();
+        var popularDest = $("<p>").addClass("top-item").text(popularArr[i]);
         $("#top-search").append(popularDest);
-
+        popularArr = [];
 
     }
 
 });
-//push cities/states into popularArr array
-// function pushIntoPopularArray() {
-//  popularArr.push(newSearch.city);
-// }
 
 //Map API call
 
