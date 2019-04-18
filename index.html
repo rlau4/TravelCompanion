@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" media="screen" href="assets/CSS/reset.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">    
     <link rel="stylesheet" type="text/css" media="screen" href="assets/CSS/style.css">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -28,7 +29,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <div class="jumbotron jumbotron-fluid">
+                <div class="jumbotron">
                     <div class="container">
                         <h1 class="display-4">Fluid jumbotron</h1>
                         <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its
@@ -37,16 +38,24 @@
                 </div>
             </div>
         </div>
+            <div class="wrapper show">
+                <div class="search-box">
+                    <input type="text" placeholder="City, Country or Zip" class="input" id="searchBar">
+                    <div class="btn1">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </div>
         <div class="row">
-            <div class="col-lg-6 col-md-6">
-                <form>
+            <div class="col-lg-6 col-md-6 hidden">
+                <form id="searchForm">
                     <div class="form-group">
-                        <input type="text" class="form-control controls" id="searchBar" placeholder="City, Country or Zip">
+                        <input type="text" class="form-control controls" id="searchBar2" placeholder="City, Country or Zip">
                     </div>
                     <button type="submit" id ="submit" class="btn btn-primary">Search</button>
                 </form>
                 <br>
-                <div id="topSearch">
+                <div id="topSearch" class="hidden">
                     <div class="card">
                         <div class="card-header">
                             Top Searches
@@ -69,10 +78,29 @@
         </div>
         <br>
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-12 hidden">
                 <div class="card">
                     <div class="card-header">
-                        API STUFF
+                        Wiki API
+                    </div>
+                    <div class="card-body">
+                        <blockquote class="blockquote mb-0">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-12 hidden">
+                <div class="card">
+                    <div class="card-header">
+                        Eventbrite API
                     </div>
                     <div class="card-body">
                         <blockquote class="blockquote mb-0">
@@ -96,7 +124,6 @@
     
     
 
-    
 </body>
 
 </html>
