@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html>
 
 <head>
@@ -20,6 +21,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.9.4/firebase.js"></script>
     <script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCbNdmkdcQobjxv3AtaJWu9aZ6DsAsRJNQ&libraries=places&callback=initMap"
         async defer></script>
@@ -66,12 +68,7 @@
                             Top Searches
                         </div>
                         <div class="card-body">
-                            <blockquote class="blockquote mb-0">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            <blockquote class="blockquote mb-0" id="top-search">
                             </blockquote>
                         </div>
                     </div>
