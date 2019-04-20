@@ -106,12 +106,12 @@ $('#searchBar').keypress(function (event) {
 //--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 //--<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
 //--<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css" />
+
 $(document).ready(function () {
     var articles = $('.articles');
-    var input = $('#searchBar').val();
-    var toSearch = '';
-    var button = $('button');
-    var searchUrl = 'https://en.wikipedia.org/api/rest_v1/page/summary/' + input;
+    var inputWiki = $('#searchBar').val();
+    var button = $('#button');
+    var searchUrl = 'https://en.wikipedia.org/api/rest_v1/page/summary/' + inputWiki;
 
     var ajaxArticleData = function () {
         $.ajax({
@@ -129,12 +129,15 @@ $(document).ready(function () {
             pageElement.append($('<hr>'));
 
             articles.append(pageElement);
-            console.log(response.title);
         })
+    }
+    document.getElementByID("#searchBar").onkeyup = function() {
+         ajaxArticleData();
+        console.log(inputWiki);
     }
     button.click(function () {
         ajaxArticleData();
-        console.log(input);
+        console.log(inputWiki);
     });
 
 })
