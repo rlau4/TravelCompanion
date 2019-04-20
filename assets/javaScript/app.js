@@ -83,11 +83,7 @@ $(document).ready(function() {
         $(".input").addClass("active").focus;
         $(this).addClass("animate");
         $(".input").val();
-<<<<<<< HEAD
-
-=======
         $("#button").hide();
->>>>>>> f51b60b84c95a73315500416e17390b90f2f1b46
     });
 
     $(".btn1").click(function(){
@@ -117,38 +113,35 @@ $("#searchForm").submit(function(e) {
 //--<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
 //--<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css" />
 
-$(document).ready(function () {
-    var articles = $('.articles');
-    var inputWiki = $('#searchBar2').val();
-    var toSearch = '';
-    var button = $('button');
-    var searchUrl = 'https://en.wikipedia.org/api/rest_v1/page/summary/' + inputWiki;
+var articles = $('.articles');
+var inputWiki = $('#searchBar').val();
+var button = $('button');
+var searchUrl = 'https://en.wikipedia.org/api/rest_v1/page/summary/atlanta' + inputWiki;
 
-    var ajaxArticleData = function () {
-        $.ajax({
-            url: searchUrl,
-            method: 'GET'
-        }).then(function(response) {
-            var pageElement = $('<div>');
-            
-            if (response.thumbnail) pageElement.append($('<img>').attr('width', 150).attr('src', response.thumbnail.source));
-            
-            pageElement.append($('<h2>').append($('<a>').text(response.title)));
 
-            pageElement.append($('<p>').text(response.extract));
 
-            pageElement.append($('<hr>'));
+function ajaxArticleData () {
+  $.ajax({
+      url: searchUrl,
+      method: 'GET'
+  }).then(function(response) {
+      var pageElement = $('<div>');
+      
+      if (response.thumbnail) pageElement.append($('<img>').attr('width', 150).attr('src', response.thumbnail.source));
+      
+      pageElement.append($('<h2>').append($('<a>').text(response.title)));
 
-            articles.append(pageElement);
-        })
-    }
-    document.onkeyup(function () {
-      ajaxArticleData();
-      console.log(inputWiki);
-    })
-    button.click(function () {
-        ajaxArticleData();
-        console.log(inputWiki);
-    });
-    
+      pageElement.append($('<p>').text(response.extract));
+
+      pageElement.append($('<hr>'));
+
+      articles.append(pageElement);
+  })
+}
+
+$("#searchBar").on('keyup', function(e){
+  if (e.keyCode == 13) {
+    ajaxArticleData();
+    console.log(inputWiki);
+  }
 })
