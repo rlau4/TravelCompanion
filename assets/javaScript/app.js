@@ -79,12 +79,21 @@ $(document).ready(function() {
         var autocomplete = new google.maps.places.Autocomplete(input);
     });
 // Original Search Bar
-    $(".btn1").click(function(){
+    $(".btn1").mouseover(function(){
         $(".input").addClass("active").focus;
         $(this).addClass("animate");
         $(".input").val();
+<<<<<<< HEAD
 
+=======
+        $("#button").hide();
+>>>>>>> f51b60b84c95a73315500416e17390b90f2f1b46
     });
+
+    $(".btn1").click(function(){
+      $(".hidden").show();
+      $(".show").hide();
+  })
 
 // Hiding and showing elements on search
 $(".hidden").hide();
