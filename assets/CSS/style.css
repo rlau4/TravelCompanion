@@ -2,8 +2,12 @@
   background-color: #425ECF;
   border: #3E57BF solid 5px !important;
 }
-h1, p{
+h1{
   color:white;
+}
+
+p {
+  color: black
 }
 
 * {
