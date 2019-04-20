@@ -1,3 +1,11 @@
+#jumbo {
+  background-color: #425ECF;
+  border: #3E57BF solid 5px !important;
+}
+h1, p{
+  color:white;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -33,32 +41,32 @@
     font-size: 18px;
     border-radius: 50px;
     color: #29313a;
-    border: 3px solid #62d474;
+    border: 3px solid #425ECF;
     transition: all 0.8s ease;
   }
   
   ::-webkit-input-placeholder {
     /* Chrome/Opera/Safari */
-    color: #62d474;
+    color: #425ECF;
   }
   ::-moz-placeholder {
     /* Firefox 19+ */
-    color: #62d474;
+    color: #425ECF;
   }
   :-ms-input-placeholder {
     /* IE 10+ */
-    color: #62d474;
+    color: #425ECF;
   }
   :-moz-placeholder {
     /* Firefox 18- */
-    color: #62d474;
+    color: #425ECF;
   }
   
   .btn1 {
     position: absolute;
     width: 80px;
     height: 80px;
-    background: #62d474;
+    background: #425ECF;
     border-radius: 50%;
     right: 45px;
     top: 10px;
@@ -85,15 +93,7 @@
     height: auto;
 }
 
-#searchBar2[type=text] {
-    width: 130px;
-    -webkit-transition: width 0.4s ease-in-out;
-    transition: width 0.4s ease-in-out;
-  }
 
-  #searchBar2[type=text]:focus {
-    width: 100%;
-  }
 
 #mapDiv {
   height: 500px;
@@ -102,4 +102,17 @@
 
 #map {
   height: 100%;
+}
+.card-header {
+  background-color: #425ECF;
+  text: white;  
+  border: #3E57BF solid 5px !important;
+}
+
+.card{
+  border: #3E57BF solid 1px !important;
+}
+
+.top-item {
+  color:black;
 }

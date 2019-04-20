@@ -29,12 +29,12 @@
         href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css" />
 
 </head>
-
+<!--class="border border-white"-->
 <body>
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <div class="jumbotron">
+                <div class="jumbotron border border-white" id="jumbo">
                     <div class="container">
                         <h1 class="display-4">Fluid jumbotron</h1>
                         <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its
@@ -44,12 +44,14 @@
             </div>
         </div>
         <div class="wrapper show">
-            <div class="search-box">
-                <input type="text" placeholder="City, Country or Zip" class="input" id="searchBar">
-                <div class="btn1">
-                    <i class="fa fa-search" aria-hidden="true"></i>
+            <form id="searchForm">
+                <div class="search-box">
+                    <input type="text" placeholder="City, Country or Zip" class="input" id="searchBar">
+                    <div class="btn1" id="button">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
         <div class="row">
             <div id="mapDiv" class="col-lg-12 hidden">
@@ -60,7 +62,7 @@
         <div class="row">
             <div class="col-lg-12 hidden">
                 <div id="topSearch" class="hidden">
-                    <div class="card">
+                    <div class="card text-white">
                         <div class="card-header">
                             Top Searches
                         </div>
@@ -75,7 +77,7 @@
         <br>
         <div class="row">
             <div class="col-lg-12 hidden">
-                <div class="card">
+                <div class="card text-white">
                     <div class="card-header">
                         Wiki API
                     </div>
@@ -92,7 +94,7 @@
             </div>
         </div>
         <br>
-       <!-- <div class="row">
+        <!-- <div class="row">
             <div class="col-lg-12 hidden">
                 <div class="card">
                     <div class="card-header">

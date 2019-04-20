@@ -22,7 +22,7 @@ var inputLong;
 
 var mf = 1;
 var m = 1;
-var item;  
+var item;
 
 // Google Places API
 $(function activatePlacesSearch() {
@@ -74,35 +74,34 @@ $("#searchBar").keyup(function (e) {
         // console.log("country:" + newSearch.country);
         popularArr.push(newSearch.city);
         popularArr = [];
-        
+
         //populate top searches array and html list
-        $(".top-item").remove();
-        data.ref().orderByChild("dateAdded").limitToLast(5).on("child_added", function (snapshot) {
+        data.ref().orderByChild("dateAdded").limitToLast(20).on("child_added", function (snapshot) {
+            $(".top-item").remove();
 
             arrayCity = snapshot.val().city;
             arrayState = snapshot.val().state;
             arrayCountry = snapshot.val().country;
-
             if (arrayState == null) {
                 popularArr.push(arrayCity + " " + arrayCountry);
             } else {
                 popularArr.push(arrayCity + " " + arrayState + " " + arrayCountry);
             }
 
-            for (i = 0; i < 5; i++) {
-                var popularDest = $("<p>").addClass("top-item").attr("id", "city" + popularArr[i]).text(popularArr[i]);
-                $("#top-search").append(popularDest);
-                popularArr = [];
-                
-            }
 
+
+            for (i = 15; i < 21; i++) {
+                var popularDest = $("<div>").addClass("top-item").attr("id", "city" + popularArr[i]).text(popularArr[i]);
+                $("#top-search").append(popularDest);
+            }
+            
         });
-    
+        
         for (var i = 0; i < popularArr.length; i++) {
             for (var i = 0; i < popularArr.length; i++) {
                 for (var j = i; j < popularArr.length; j++) {
                     if (popularArr[i] == popularArr[j])
-                        m++;
+                    m++;
                     if (mf < m) {
                         mf = m;
                         item = popularArr[i];
@@ -113,6 +112,7 @@ $("#searchBar").keyup(function (e) {
         }
         console.log(item + " " + mf);
         console.log(popularArr);
+        
 
 
 
@@ -138,6 +138,7 @@ $("#searchBar").keyup(function (e) {
 function recentSearchClick(){
     currentDest = $(this).text();
     console.log(currentDest);
+
 }
 $(document).on("click", ".top-item", recentSearchClick);
 //Map API call
@@ -205,23 +206,25 @@ $(document).ready(function () {
     initMap();
 
 });
-// $(function activatePlacesSearch(){
-//     var input = document.getElementById('searchBar');
-//     var autocomplete = new google.maps.places.Autocomplete(input);
-// });
-// $(function activatePlacesSearch(){
-//     var input = document.getElementById('searchBar2');
-//     var autocomplete = new google.maps.places.Autocomplete(input);
-// });
-// Original Search Bar
-$(".btn1").click(function () {
+
+// Search bar and Button
+$(".btn1").mouseover(function () {
     $(".input").addClass("active").focus;
     $(this).addClass("animate");
+    $(this).data("form", submit);
     $(".input").val("");
-
 });
 
-// Hiding and showing elements on search
+$(".btn1").click(function(){
+    $(".hidden").show();
+    $(".show").hide();
+})
+
+$("#searchForm").submit(function (e) {
+    e.preventDefault();
+});
+
+
 $(".hidden").hide();
 $('#searchBar').keypress(function (event) {
     var keycode = (event.keyCode ? event.keyCode : event.which);
@@ -230,18 +233,10 @@ $('#searchBar').keypress(function (event) {
         $(".hidden").show();
         $(".show").hide();
     }
-
 });
 
-$("#searchForm").submit(function (e) {
-    e.preventDefault();
-});
 
-//--html scripts to use with Wiki api
 
-//--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-//--<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
-//--<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css" />
 $(document).ready(function () {
     var articles = $('.articles');
     var input = $('#input').val();
