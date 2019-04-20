@@ -19,6 +19,12 @@ var inputState;
 var inputCountry;
 var inputLat;
 var inputLong;
+var splitCurrentDest = [];
+
+var articles = $('.articles');
+var inputWiki;
+var inputWiki2;
+var searchUrl = 'https://en.wikipedia.org/api/rest_v1/page/summary/' + inputWiki + inputWiki2;
 
 var mf = 1;
 var m = 1;
@@ -239,10 +245,7 @@ $("#searchForm").submit(function(e) {
 //--<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
 //--<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css" />
 
-var articles = $('.articles');
-var inputWiki = $('#searchBar').val();
-var button = $('button');
-var searchUrl = 'https://en.wikipedia.org/api/rest_v1/page/summary/atlanta' + inputWiki;
+
 
 
 
@@ -261,13 +264,14 @@ function ajaxArticleData () {
 
       pageElement.append($('<hr>'));
 
-      articles.append(pageElement);
+      articles.prepend(pageElement);
+      console.log(inputCity);
   })
 }
 
 $("#searchBar").on('keyup', function(e){
   if (e.keyCode == 13) {
     ajaxArticleData();
-    console.log(inputWiki);
+    console.log();
   }
 })
