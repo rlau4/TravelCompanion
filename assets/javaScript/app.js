@@ -61,7 +61,9 @@ function initMap() {
             }
           });
           map.fitBounds(bounds);
+          console.log("#searchBar2".val)
         });
+        
       }
 
 
