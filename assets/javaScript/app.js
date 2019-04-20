@@ -111,10 +111,13 @@ $("#searchForm").submit(function(e) {
 $(document).ready(function () {
     var articles = $('.articles');
 <<<<<<< HEAD
+<<<<<<< HEAD
     var inputWiki = $('#searchBar').val();
     var button = $('#button');
     var searchUrl = 'https://en.wikipedia.org/api/rest_v1/page/summary/' + inputWiki;
 =======
+=======
+>>>>>>> 435271f11bdffe9685bbf1d594334695b5e776ee
     var input = $('#searchBar2').val();
     var toSearch = '';
     var button = $('button');

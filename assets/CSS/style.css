@@ -109,7 +109,7 @@ p {
 }
 .card-header {
   background-color: #425ECF;
-  text: white;  
+  color: white;  
   border: #3E57BF solid 5px !important;
 }
 
