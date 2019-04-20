@@ -105,10 +105,14 @@ h1, p{
 }
 .card-header {
   background-color: #425ECF;
-  text: white;  
+  color: white;  
   border: #3E57BF solid 5px !important;
 }
 
 .card{
   border: #3E57BF solid 1px !important;
+}
+
+.top-item {
+  color:black;
 }
