@@ -60,8 +60,7 @@ function initMap() {
               bounds.extend(place.geometry.location);
             }
           });
-          map.fitBounds(bounds);
-          console.log("#searchBar2".val)
+          map.fitBounds(bounds);       
         });
         
       }
