@@ -1,9 +1,141 @@
+var popularArr = [];
+var currentDest = "HERE";
+
+// Initialize Firebase
+var config = {
+    apiKey: "AIzaSyAMFa984GQn-y7573j1GzE5cEhQif-JxRM",
+    authDomain: "project1-1555166664256.firebaseapp.com",
+    databaseURL: "https://project1-1555166664256.firebaseio.com",
+    projectId: "project1-1555166664256",
+    storageBucket: "",
+    messagingSenderId: "223213904031"
+};
+firebase.initializeApp(config);
+
+var data = firebase.database();
+
+var inputCity;
+var inputState;
+var inputCountry;
+var inputLat;
+var inputLong;
+
+var mf = 1;
+var m = 1;
+var item;
+var recentListsStart
+var mostRecentIndex
 // Google Places API
 $(function activatePlacesSearch() {
+<<<<<<< HEAD
   var input = document.getElementById('searchBar');
   var autocomplete = new google.maps.places.Autocomplete(input);
+=======
+    var input = $('#searchBar');
+    var autocomplete = new google.maps.places.Autocomplete(input);
+>>>>>>> b7e470a21cc4a4e30430f8937b2a7b223bff53c0
 });
 
+// function searchInput() {
+$("#searchBar").keyup(function (e) {
+    currentDest = $("#searchBar").val();
+
+    if (e.which == 13) {
+
+
+        splitCurrentDest = currentDest.split(' ');
+        console.log(splitCurrentDest);
+
+        //splits user input into strings for each word seperating city, state, and country
+        if (splitCurrentDest.length == 3) {
+            inputCity = splitCurrentDest[0];
+            inputState = splitCurrentDest[1];
+            inputCountry = splitCurrentDest[2];
+        } else if (splitCurrentDest.length == 2) {
+            inputCity = splitCurrentDest[0];
+            inputState = null;
+            inputCountry = splitCurrentDest[1];
+        } else if (splitCurrentDest.length == 4) {
+            inputCity = splitCurrentDest[0] + " " + splitCurrentDest[1];
+            inputState = splitCurrentDest[2];
+            inputCountry = splitCurrentDest[3];
+        } else if (splitCurrentDest.length == 5) {
+            inputCity = splitCurrentDest[0] + " " + splitCurrentDest[1] + " " + splitCurrentDest[2];
+            inputState = splitCurrentDest[3];
+            inputCountry = splitCurrentDest[4];
+        }
+
+        //variable for pushing to firebase
+        newSearch = {
+            city: inputCity,
+            state: inputState,
+            country: inputCountry,
+            dateAdded: firebase.database.ServerValue.TIMESTAMP,
+            // latitude: inputLat,
+            // longitude: inputLong
+        }
+//push to firebase
+        data.ref().push(newSearch);
+        // console.log("City: " + newSearch.city);
+        // console.log("State " + newSearch.state);
+        // console.log("country:" + newSearch.country);
+        popularArr.push(newSearch.city);
+        popularArr = [];
+
+        //populate top searches array and html list
+        data.ref().orderByChild("dateAdded").limitToLast(200).on("child_added", function (snapshot) {
+            $(".top-item").remove();
+
+            arrayCity = snapshot.val().city;
+            arrayState = snapshot.val().state;
+            arrayCountry = snapshot.val().country;
+            if (arrayState == null) {
+                popularArr.push(arrayCity + " " + arrayCountry);
+            } else {
+                popularArr.push(arrayCity + " " + arrayState + " " + arrayCountry);
+            }
+        
+            var mostRecentIndex = popularArr.length;
+            var recentListsStart = mostRecentIndex - 5;
+            // var mostRecent = popularArr[mostRecentIndex];
+            // var popularDest = $("<div>").addClass("top-item").attr("id", "city" + mostRecent).text(mostRecent);
+            for (i = recentListsStart; i < mostRecentIndex; i++) {
+                var popularDest = $("<div>").addClass("top-item").attr("id", "city" + popularArr[i]).text(popularArr[i]);
+                $("#top-search").append(popularDest);
+            }
+
+        });
+        
+        for (var i = 0; i < popularArr.length; i++) {
+            for (var i = 0; i < popularArr.length; i++) {
+                for (var j = i; j < popularArr.length; j++) {
+                    if (popularArr[i] == popularArr[j])
+                    m++;
+                    if (mf < m) {
+                        mf = m;
+                        item = popularArr[i];
+                    }
+                }
+                m = 0;
+            }
+        }
+        console.log(item + " " + mf);
+        console.log(popularArr);
+        
+    }
+
+    $("#searchBar").text('');
+
+});
+
+
+
+function recentSearchClick(){
+    currentDest = $(this).text();
+    console.log(currentDest);
+
+}
+$(document).on("click", ".top-item", recentSearchClick);
 //Map API call
 
 var map;
@@ -93,6 +225,7 @@ $(".btn1").click(function () {
 
 // Hiding and showing elements on search
 $(".hidden").hide();
+<<<<<<< HEAD
 $('#searchBar').keypress(function (event) {
   var keycode = (event.keyCode ? event.keyCode : event.which);
 
@@ -101,17 +234,21 @@ $('#searchBar').keypress(function (event) {
     $(".show").hide();
   }
 
+=======
+$('#searchBar').keypress(function(event){
+    var keycode = (event.keyCode ? event.keyCode : event.which);
+    
+    if(keycode == '13'){
+        $(".hidden").show();
+        $(".show").hide();
+    }
+>>>>>>> b7e470a21cc4a4e30430f8937b2a7b223bff53c0
 });
 
 $("#searchForm").submit(function (e) {
   e.preventDefault();
 });
 
-//--html scripts to use with Wiki api
-
-//--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-//--<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
-//--<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css" />
 $(document).ready(function () {
   var articles = $('.articles');
   var inputWiki = $('#searchBar2').val();
