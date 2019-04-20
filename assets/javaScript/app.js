@@ -70,14 +70,14 @@ $(document).ready(function() {
     initMap();
     
 });
-    // $(function activatePlacesSearch(){
-    //     var input = document.getElementById('searchBar');
-    //     var autocomplete = new google.maps.places.Autocomplete(input);
-    // });
-    // $(function activatePlacesSearch(){
-    //     var input = document.getElementById('searchBar2');
-    //     var autocomplete = new google.maps.places.Autocomplete(input);
-    // });
+    $(function activatePlacesSearch(){
+        var input = document.getElementById('searchBar');
+        var autocomplete = new google.maps.places.Autocomplete(input);
+    });
+    $(function activatePlacesSearch(){
+        var input = document.getElementById('searchBar2');
+        var autocomplete = new google.maps.places.Autocomplete(input);
+    });
 // Original Search Bar
     $(".btn1").click(function(){
         $(".input").addClass("active").focus;
