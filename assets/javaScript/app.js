@@ -79,12 +79,17 @@ $(document).ready(function() {
         var autocomplete = new google.maps.places.Autocomplete(input);
     });
 // Original Search Bar
-    $(".btn1").click(function(){
+    $(".btn1").mouseover(function(){
         $(".input").addClass("active").focus;
         $(this).addClass("animate");
-        $(".input").val("");
-
+        $(".input").val();
+        $("#button").hide();
     });
+
+    $(".btn1").click(function(){
+      $(".hidden").show();
+      $(".show").hide();
+  })
 
 // Hiding and showing elements on search
 $(".hidden").hide();
