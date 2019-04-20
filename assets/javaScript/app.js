@@ -20,11 +20,22 @@ var inputCountry;
 var inputLat;
 var inputLong;
 var splitCurrentDest = [];
+<<<<<<< HEAD
 
 var articles = $('.articles');
 var inputWiki;
 var inputWiki2;
 var searchUrl = 'https://en.wikipedia.org/api/rest_v1/page/summary/' + inputWiki + inputWiki2;
+=======
+var slicedCurrentCity;
+var slicedCurrentState;
+var slicedCurrentCountry;
+
+var articles = $('.articles');
+var inputWiki = $('#searchBar').val().trim();
+var button = $('button');
+var searchUrl = 'https://en.wikipedia.org/api/rest_v1/page/summary/';
+>>>>>>> 37838ad770b29be95f8735bb82f5097cc141be03
 
 var mf = 1;
 var m = 1;
@@ -45,6 +56,7 @@ $("#searchBar").keyup(function (e) {
 
 
         splitCurrentDest = currentDest.split(' ');
+        
         console.log(splitCurrentDest);
 
         //splits user input into strings for each word seperating city, state, and country
@@ -65,6 +77,11 @@ $("#searchBar").keyup(function (e) {
             inputState = splitCurrentDest[3];
             inputCountry = splitCurrentDest[4];
         }
+
+        console.log(inputCity);
+        slicedCurrentCity = inputCity.slice(0, inputCity.length - 1);
+        slicedCurrentState = inputState.slice(0, inputState.length - 1);
+        slicedCurrentCountry = inputCountry.slice(0, inputCountry.length - 1);
 
         //variable for pushing to firebase
         newSearch = {
@@ -126,7 +143,7 @@ $("#searchBar").keyup(function (e) {
     }
 
     $("#searchBar").text('');
-
+    searchUrl = 'https://en.wikipedia.org/api/rest_v1/page/summary/' + inputCity;
 });
 
 
@@ -239,17 +256,17 @@ $("#searchForm").submit(function(e) {
     e.preventDefault();
 });
 
-//--html scripts to use with Wiki api
-
-//--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-//--<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
-//--<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css" />
 
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> 37838ad770b29be95f8735bb82f5097cc141be03
 
 
 
 function ajaxArticleData () {
+    searchUrl = 'https://en.wikipedia.org/w/api.php?action=query&titles='  + slicedCurrentCity + "%" + slicedCurrentState + "%" + slicedCurrentCountry + '&prop=info&format=jsonfm';
   $.ajax({
       url: searchUrl,
       method: 'GET'
