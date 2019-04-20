@@ -12,94 +12,95 @@ var infowindow;
 
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
-        center: { lat: -34.397, lng: 150.644 },
+        center: {lat: -34.397, lng: 150.644},
         zoom: 8,
         zoomControl: true,
         scaleControl: true,
-        fullscreenControl: true,
-    });
+        fullscreenControl: false,
+      });
+      
 
+        // Create the search box and link it to the UI element.
+        var input = document.getElementById('searchBar');
+        var searchBox = new google.maps.places.SearchBox(input);
+       map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
-    // Create the search box and link it to the UI element.
-    var input = document.getElementById('searchBar');
-    var searchBox = new google.maps.places.SearchBox(input);
-    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+        // Bias the SearchBox results towards current map's viewport.
+        map.addListener('bounds_changed', function() {
+          searchBox.setBounds(map.getBounds());
+        });
 
-    // Bias the SearchBox results towards current map's viewport.
-    map.addListener('bounds_changed', function () {
-        searchBox.setBounds(map.getBounds());
-    });
+        var markers = [];
+        // Listen for the event fired when the user selects a prediction and retrieve
+        // more details for that place.
+        searchBox.addListener('places_changed', function() {
+          var places = searchBox.getPlaces();
 
-    var markers = [];
-    // Listen for the event fired when the user selects a prediction and retrieve
-    // more details for that place.
-    searchBox.addListener('places_changed', function () {
-        var places = searchBox.getPlaces();
-
-        if (places.length == 0) {
+          if (places.length == 0) {
             return;
-        }
+          }
 
-        // For each place, get the icon, name and location.
-        var bounds = new google.maps.LatLngBounds();
-        places.forEach(function (place) {
-
+          // For each place, get the icon, name and location.
+          var bounds = new google.maps.LatLngBounds();
+          places.forEach(function(place) {
+            
             var icon = {
-                url: place.icon,
-                size: new google.maps.Size(71, 71),
-                origin: new google.maps.Point(0, 0),
-                anchor: new google.maps.Point(17, 34),
-                scaledSize: new google.maps.Size(25, 25)
+              url: place.icon,
+              size: new google.maps.Size(71, 71),
+              origin: new google.maps.Point(0, 0),
+              anchor: new google.maps.Point(17, 34),
+              scaledSize: new google.maps.Size(25, 25)
             };
 
 
             if (place.geometry.viewport) {
-                // Only geocodes have viewport.
-                bounds.union(place.geometry.viewport);
+              // Only geocodes have viewport.
+              bounds.union(place.geometry.viewport);
             } else {
-                bounds.extend(place.geometry.location);
+              bounds.extend(place.geometry.location);
             }
+          });
+          map.fitBounds(bounds);       
         });
-        map.fitBounds(bounds);
-    });
-}
+        
+      }
 
 
-$(document).ready(function () {
+$(document).ready(function() {
     initMap();
-
+    
 });
+    $(function activatePlacesSearch(){
+        var input = document.getElementById('searchBar');
+        var autocomplete = new google.maps.places.Autocomplete(input);
+    });
+    $(function activatePlacesSearch(){
+        var input = document.getElementById('searchBar2');
+        var autocomplete = new google.maps.places.Autocomplete(input);
+    });
+// Original Search Bar
+    $(".btn1").click(function(){
+        $(".input").addClass("active").focus;
+        $(this).addClass("animate");
+        $(".input").val("");
 
-// Search bar and Button
-$(".btn1").mouseover(function () {
-    $(".input").addClass("active").focus;
-    $(this).addClass("animate");
-    $(this).data("form", submit);
-    $(".input").val("");
-});
+    });
 
-$(".btn1").click(function(){
-    $(".hidden").show();
-    $(".show").hide();
-})
-
-$("#searchForm").submit(function (e) {
-    e.preventDefault();
-});
-
-
+// Hiding and showing elements on search
 $(".hidden").hide();
-$('#searchBar').keypress(function (event) {
+$('#searchBar').keypress(function(event){
     var keycode = (event.keyCode ? event.keyCode : event.which);
-
-    if (keycode == '13') {
+    
+    if(keycode == '13'){
         $(".hidden").show();
         $(".show").hide();
     }
-
+    
 });
 
-
+$("#searchForm").submit(function(e) {
+    e.preventDefault();
+});
 
 //--html scripts to use with Wiki api
 
@@ -109,19 +110,26 @@ $('#searchBar').keypress(function (event) {
 
 $(document).ready(function () {
     var articles = $('.articles');
+<<<<<<< HEAD
     var inputWiki = $('#searchBar').val();
     var button = $('#button');
     var searchUrl = 'https://en.wikipedia.org/api/rest_v1/page/summary/' + inputWiki;
+=======
+    var input = $('#searchBar2').val();
+    var toSearch = '';
+    var button = $('button');
+    var searchUrl = 'https://en.wikipedia.org/api/rest_v1/page/summary/' + input;
+>>>>>>> 435271f11bdffe9685bbf1d594334695b5e776ee
 
     var ajaxArticleData = function () {
         $.ajax({
             url: searchUrl,
             method: 'GET'
-        }).then(function (response) {
+        }).then(function(response) {
             var pageElement = $('<div>');
-
+            
             if (response.thumbnail) pageElement.append($('<img>').attr('width', 150).attr('src', response.thumbnail.source));
-
+            
             pageElement.append($('<h2>').append($('<a>').text(response.title)));
 
             pageElement.append($('<p>').text(response.extract));
@@ -139,5 +147,5 @@ $(document).ready(function () {
         ajaxArticleData();
         console.log(inputWiki);
     });
-
+    
 })
