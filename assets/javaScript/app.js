@@ -82,7 +82,7 @@ $(document).ready(function() {
     $(".btn1").click(function(){
         $(".input").addClass("active").focus;
         $(this).addClass("animate");
-        $(".input").val("");
+        $(".input").val();
 
     });
 
@@ -110,19 +110,10 @@ $("#searchForm").submit(function(e) {
 
 $(document).ready(function () {
     var articles = $('.articles');
-<<<<<<< HEAD
-<<<<<<< HEAD
-    var inputWiki = $('#searchBar').val();
-    var button = $('#button');
-    var searchUrl = 'https://en.wikipedia.org/api/rest_v1/page/summary/' + inputWiki;
-=======
-=======
->>>>>>> 435271f11bdffe9685bbf1d594334695b5e776ee
-    var input = $('#searchBar2').val();
+    var inputWiki = $('#searchBar2').val();
     var toSearch = '';
     var button = $('button');
-    var searchUrl = 'https://en.wikipedia.org/api/rest_v1/page/summary/' + input;
->>>>>>> 435271f11bdffe9685bbf1d594334695b5e776ee
+    var searchUrl = 'https://en.wikipedia.org/api/rest_v1/page/summary/' + inputWiki;
 
     var ajaxArticleData = function () {
         $.ajax({
@@ -142,10 +133,10 @@ $(document).ready(function () {
             articles.append(pageElement);
         })
     }
-    document.getElementByID("#searchBar").onkeyup = function() {
-         ajaxArticleData();
-        console.log(inputWiki);
-    }
+    document.onkeyup(function () {
+      ajaxArticleData();
+      console.log(inputWiki);
+    })
     button.click(function () {
         ajaxArticleData();
         console.log(inputWiki);
