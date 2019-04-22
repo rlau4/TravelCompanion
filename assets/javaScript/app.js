@@ -1,7 +1,7 @@
-var popularArr = [];
+var popularArr = ["A", "A", "B", "C"];
 var currentDest = "HERE";
 
-// Initialize Firebase
+Initialize Firebase
 var config = {
     apiKey: "AIzaSyAMFa984GQn-y7573j1GzE5cEhQif-JxRM",
     authDomain: "project1-1555166664256.firebaseapp.com",
@@ -99,13 +99,13 @@ $("#searchBar").keyup(function (e) {
 
 
         popListPopulate();
+
         console.log(item + " " + mf);
         console.log(popularArr);
 
     }
-
+    topSearchedItem();
     $("#searchBar").text('');
-    // searchUrl = 'https://en.wikipedia.org/api/rest_v1/page/summary/' + inputCity;
 });
 
 //populate top searches array and html list
@@ -130,7 +130,9 @@ function popListPopulate() {
         }
 
     });
+}
 
+function topSearchedItem() {
     for (var i = 0; i < popularArr.length; i++) {
         for (var i = 0; i < popularArr.length; i++) {
             for (var j = i; j < popularArr.length; j++) {
@@ -144,9 +146,10 @@ function popListPopulate() {
             m = 0;
         }
     }
-    var topSearchItem = $("div"). item;
-    $("#top-search").append(item);
-}
+    var topSearchItem = $("div").text(item);
+    $("#top-search").append(topSearchItem);
+};
+
 
 function recentSearchClick() {
     currentDest = $(this).text();
@@ -251,7 +254,7 @@ $("#searchForm").submit(function (e) {
 
 
 //wiki api
-/* function ajaxArticleData() {
+function ajaxArticleData() {
     if (inputState == null) {
         searchUrl = 'https://en.wikipedia.org/w/api.php?action=query&titles=' + slicedCurrentCity + "%" + inputCountry + '&prop=info&format=jsonfm';
     } else {
@@ -263,55 +266,21 @@ $("#searchForm").submit(function (e) {
     }).then(function (response) {
         var pageElement = $('<div>');
 
-        if (response.thumbnail) pageElement.append($('<img>').attr('width', 150).attr('src', response.thumbnail.source)); */
+        if (response.thumbnail) pageElement.append($('<img>').attr('width', 150).attr('src', response.thumbnail.source));
 
-/* if (slicedCurrentState === '') {
-    function ajaxArticleData () {
-    searchUrl = 'https://en.wikipedia.org/api/rest_v1/page/summary/'  + slicedCurrentCity;
-  $.ajax({
-      url: searchUrl,
-      method: 'GET'
-  }).then(function(response) {
-      var pageElement = $('<div>');
-      
-      if (response.thumbnail) pageElement.append($('<img>').attr('width', 150).attr('src', response.thumbnail.source));
-      
-      pageElement.append($('<h2>').append($('<a>').text(response.title)));
+        pageElement.append($('<h2>').append($('<a>').text(response.title)));
 
         pageElement.append($('<p>').text(response.extract));
 
         pageElement.append($('<hr>'));
 
-      articles.prepend(pageElement);
-      console.log(inputCity);
-  })
+        articles.append(pageElement);
+    })
 }
-} else { */
-    function ajaxArticleData () {
-        searchUrl = 'https://en.wikipedia.org/api/rest_v1/page/summary/'  + slicedCurrentCity;
-      $.ajax({
-          url: searchUrl,
-          method: 'GET'
-      }).then(function(response) {
-          var pageElement = $('<div>');
-          
-          if (response.thumbnail) pageElement.append($('<img>').attr('width', 150).attr('src', response.thumbnail.source));
-          
-          pageElement.append($('<h2>').append($('<a>').text(response.title)));
-    
-          pageElement.append($('<p>').text(response.extract));
-    
-          pageElement.append($('<hr>'));
-    
-          articles.prepend(pageElement);
-          console.log(inputCity);
-      })
+
+$("#searchBar").on('keyup', function (e) {
+    if (e.keyCode == 13) {
+        ajaxArticleData();
+        console.log(inputWiki);
     }
-
-
-$("#searchBar").on('keyup', function(e){
-  if (e.keyCode == 13) {
-    ajaxArticleData();
-    console.log(searchUrl);
-  }
 })
