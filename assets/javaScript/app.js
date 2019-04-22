@@ -1,7 +1,7 @@
 var popularArr = ["A", "A", "B", "C"];
 var currentDest = "HERE";
 
-Initialize Firebase
+//Initialize Firebase
 var config = {
     apiKey: "AIzaSyAMFa984GQn-y7573j1GzE5cEhQif-JxRM",
     authDomain: "project1-1555166664256.firebaseapp.com",
@@ -97,6 +97,7 @@ $("#searchBar").keyup(function (e) {
         popularArr.push(newSearch.city);
         popularArr = [];
 
+        topSearchedItem();
         ajaxArticleData();
         popListPopulate();
 
@@ -104,7 +105,6 @@ $("#searchBar").keyup(function (e) {
         console.log(popularArr);
 
     }
-    topSearchedItem();
     $("#searchBar").text('');
 });
 
