@@ -1,7 +1,7 @@
-var popularArr = ["A", "A", "B", "C"];
+var popularArr = [];
 var currentDest = "HERE";
 
-//Initialize Firebase
+// Initialize Firebase
 var config = {
     apiKey: "AIzaSyAMFa984GQn-y7573j1GzE5cEhQif-JxRM",
     authDomain: "project1-1555166664256.firebaseapp.com",
@@ -39,6 +39,28 @@ var map;
 var service;
 var infowindow;
 var input;
+
+// wikipedia API, adds results to page
+function ajaxArticleData () {
+    searchUrl = 'https://en.wikipedia.org/api/rest_v1/page/summary/'  + slicedCurrentCity;
+    $.ajax({
+        url: searchUrl,
+        method: 'GET'
+    }).then(function(response) {
+        var pageElement = $('<div>');
+        
+        if (response.thumbnail) pageElement.append($('<img>').attr('width', 150).attr('src', response.thumbnail.source));
+        
+        pageElement.append($('<h2>').append($('<a>').text(response.title)));
+
+        pageElement.append($('<p>').text(response.extract));
+
+        pageElement.append($('<hr>'));
+
+        articles.html(pageElement);
+        console.log(inputCity);
+    })
+}
 
 // Google Places API
 function activatePlacesSearch() {
@@ -97,15 +119,15 @@ $("#searchBar").keyup(function (e) {
         popularArr.push(newSearch.city);
         popularArr = [];
 
-        topSearchedItem();
         ajaxArticleData();
         popListPopulate();
-
         console.log(item + " " + mf);
         console.log(popularArr);
 
     }
+
     $("#searchBar").text('');
+    // searchUrl = 'https://en.wikipedia.org/api/rest_v1/page/summary/' + inputCity;
 });
 
 //populate top searches array and html list
@@ -130,9 +152,7 @@ function popListPopulate() {
         }
 
     });
-}
 
-function topSearchedItem() {
     for (var i = 0; i < popularArr.length; i++) {
         for (var i = 0; i < popularArr.length; i++) {
             for (var j = i; j < popularArr.length; j++) {
@@ -146,10 +166,7 @@ function topSearchedItem() {
             m = 0;
         }
     }
-    var topSearchItem = $("div").text(item);
-    $("#top-search").append(topSearchItem);
-};
-
+}
 
 function recentSearchClick() {
     currentDest = $(this).text();
@@ -253,28 +270,25 @@ $("#searchForm").submit(function (e) {
 
 
 
-//wiki api
-function ajaxArticleData() {
-    if (inputState == null) {
-        searchUrl = 'https://en.wikipedia.org/w/api.php?action=query&titles=' + slicedCurrentCity + "%" + inputCountry + '&prop=info&format=jsonfm';
-    } else {
-        searchUrl = 'https://en.wikipedia.org/w/api.php?action=query&titles=' + slicedCurrentCity + "%" + slicedCurrentState + "%" + inputCountry + '&prop=info&format=jsonfm';
-    }
-    $.ajax({
-        url: searchUrl,
-        method: 'GET'
-    }).then(function(response) {
-        var pageElement = $('<div>');
+// // wikipedia API, adds results to page
+// function ajaxArticleData () {
+//     searchUrl = 'https://en.wikipedia.org/api/rest_v1/page/summary/'  + slicedCurrentCity;
+//     $.ajax({
+//         url: searchUrl,
+//         method: 'GET'
+//     }).then(function(response) {
+//         var pageElement = $('<div>');
         
-        if (response.thumbnail) pageElement.append($('<img>').attr('width', 150).attr('src', response.thumbnail.source));
+//         if (response.thumbnail) pageElement.append($('<img>').attr('width', 150).attr('src', response.thumbnail.source));
         
-        pageElement.append($('<h2>').append($('<a>').text(response.title)));
+//         pageElement.append($('<h2>').append($('<a>').text(response.title)));
 
-        pageElement.append($('<p>').text(response.extract));
+//         pageElement.append($('<p>').text(response.extract));
 
-        pageElement.append($('<hr>'));
+//         pageElement.append($('<hr>'));
 
-        articles.html(pageElement);
-        console.log(inputCity);
-    })
-}
+//         articles.html(pageElement);
+//         console.log(inputCity);
+//     })
+// }
+
