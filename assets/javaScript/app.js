@@ -144,6 +144,8 @@ function popListPopulate() {
             m = 0;
         }
     }
+    var topSearchItem = $("div"). item;
+    $("#top-search").append(item);
 }
 
 function recentSearchClick() {
