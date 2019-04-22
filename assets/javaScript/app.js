@@ -20,13 +20,6 @@ var inputCountry;
 var inputLat;
 var inputLong;
 var splitCurrentDest = [];
-<<<<<<< HEAD
-
-var articles = $('.articles');
-var inputWiki;
-var inputWiki2;
-var searchUrl = 'https://en.wikipedia.org/api/rest_v1/page/summary/' + inputWiki + inputWiki2;
-=======
 var slicedCurrentCity;
 var slicedCurrentState;
 var slicedCurrentCountry;
@@ -35,7 +28,6 @@ var articles = $('.articles');
 var inputWiki = $('#searchBar').val().trim();
 var button = $('button');
 var searchUrl = 'https://en.wikipedia.org/api/rest_v1/page/summary/';
->>>>>>> 37838ad770b29be95f8735bb82f5097cc141be03
 
 var mf = 1;
 var m = 1;
@@ -258,15 +250,12 @@ $("#searchForm").submit(function(e) {
 
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 37838ad770b29be95f8735bb82f5097cc141be03
 
 
 
-function ajaxArticleData () {
-    searchUrl = 'https://en.wikipedia.org/w/api.php?action=query&titles='  + slicedCurrentCity + "%" + slicedCurrentState + "%" + slicedCurrentCountry + '&prop=info&format=jsonfm';
+if (slicedCurrentState === '') {
+    function ajaxArticleData () {
+    searchUrl = 'https://en.wikipedia.org/api/rest_v1/page/summary/'  + slicedCurrentCity + "_" + slicedCurrentCountry;
   $.ajax({
       url: searchUrl,
       method: 'GET'
@@ -285,10 +274,33 @@ function ajaxArticleData () {
       console.log(inputCity);
   })
 }
+} else {
+    function ajaxArticleData () {
+        searchUrl = 'https://en.wikipedia.org/api/rest_v1/page/summary/'  + slicedCurrentCity + "_" + slicedCurrentState;
+      $.ajax({
+          url: searchUrl,
+          method: 'GET'
+      }).then(function(response) {
+          var pageElement = $('<div>');
+          
+          if (response.thumbnail) pageElement.append($('<img>').attr('width', 150).attr('src', response.thumbnail.source));
+          
+          pageElement.append($('<h2>').append($('<a>').text(response.title)));
+    
+          pageElement.append($('<p>').text(response.extract));
+    
+          pageElement.append($('<hr>'));
+    
+          articles.prepend(pageElement);
+          console.log(inputCity);
+      })
+    }
+
+}
 
 $("#searchBar").on('keyup', function(e){
   if (e.keyCode == 13) {
     ajaxArticleData();
-    console.log();
+    console.log(searchUrl);
   }
 })
