@@ -97,7 +97,7 @@ $("#searchBar").keyup(function (e) {
         popularArr.push(newSearch.city);
         popularArr = [];
 
-
+        ajaxArticleData();
         popListPopulate();
         console.log(item + " " + mf);
         console.log(popularArr);
@@ -248,68 +248,24 @@ $("#searchForm").submit(function (e) {
 
 
 
-//wiki api
-/* function ajaxArticleData() {
-    if (inputState == null) {
-        searchUrl = 'https://en.wikipedia.org/w/api.php?action=query&titles=' + slicedCurrentCity + "%" + inputCountry + '&prop=info&format=jsonfm';
-    } else {
-        searchUrl = 'https://en.wikipedia.org/w/api.php?action=query&titles=' + slicedCurrentCity + "%" + slicedCurrentState + "%" + inputCountry + '&prop=info&format=jsonfm';
-    }
+// wikipedia API, adds results to page
+function ajaxArticleData () {
+    searchUrl = 'https://en.wikipedia.org/api/rest_v1/page/summary/'  + slicedCurrentCity;
     $.ajax({
         url: searchUrl,
         method: 'GET'
-    }).then(function (response) {
+    }).then(function(response) {
         var pageElement = $('<div>');
-
-        if (response.thumbnail) pageElement.append($('<img>').attr('width', 150).attr('src', response.thumbnail.source)); */
-
-/* if (slicedCurrentState === '') {
-    function ajaxArticleData () {
-    searchUrl = 'https://en.wikipedia.org/api/rest_v1/page/summary/'  + slicedCurrentCity;
-  $.ajax({
-      url: searchUrl,
-      method: 'GET'
-  }).then(function(response) {
-      var pageElement = $('<div>');
-      
-      if (response.thumbnail) pageElement.append($('<img>').attr('width', 150).attr('src', response.thumbnail.source));
-      
-      pageElement.append($('<h2>').append($('<a>').text(response.title)));
+        
+        if (response.thumbnail) pageElement.append($('<img>').attr('width', 150).attr('src', response.thumbnail.source));
+        
+        pageElement.append($('<h2>').append($('<a>').text(response.title)));
 
         pageElement.append($('<p>').text(response.extract));
 
         pageElement.append($('<hr>'));
 
-      articles.prepend(pageElement);
-      console.log(inputCity);
-  })
+        articles.html(pageElement);
+        console.log(inputCity);
+    })
 }
-} else { */
-    function ajaxArticleData () {
-        searchUrl = 'https://en.wikipedia.org/api/rest_v1/page/summary/'  + slicedCurrentCity;
-      $.ajax({
-          url: searchUrl,
-          method: 'GET'
-      }).then(function(response) {
-          var pageElement = $('<div>');
-          
-          if (response.thumbnail) pageElement.append($('<img>').attr('width', 150).attr('src', response.thumbnail.source));
-          
-          pageElement.append($('<h2>').append($('<a>').text(response.title)));
-    
-          pageElement.append($('<p>').text(response.extract));
-    
-          pageElement.append($('<hr>'));
-    
-          articles.prepend(pageElement);
-          console.log(inputCity);
-      })
-    }
-
-
-$("#searchBar").on('keyup', function(e){
-  if (e.keyCode == 13) {
-    ajaxArticleData();
-    console.log(searchUrl);
-  }
-})
