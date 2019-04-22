@@ -97,7 +97,7 @@ $("#searchBar").keyup(function (e) {
         popularArr.push(newSearch.city);
         popularArr = [];
 
-
+        ajaxArticleData();
         popListPopulate();
 
         console.log(item + " " + mf);
@@ -263,24 +263,18 @@ function ajaxArticleData() {
     $.ajax({
         url: searchUrl,
         method: 'GET'
-    }).then(function (response) {
+    }).then(function(response) {
         var pageElement = $('<div>');
-
+        
         if (response.thumbnail) pageElement.append($('<img>').attr('width', 150).attr('src', response.thumbnail.source));
-
+        
         pageElement.append($('<h2>').append($('<a>').text(response.title)));
 
         pageElement.append($('<p>').text(response.extract));
 
         pageElement.append($('<hr>'));
 
-        articles.append(pageElement);
+        articles.html(pageElement);
+        console.log(inputCity);
     })
 }
-
-$("#searchBar").on('keyup', function (e) {
-    if (e.keyCode == 13) {
-        ajaxArticleData();
-        console.log(inputWiki);
-    }
-})
