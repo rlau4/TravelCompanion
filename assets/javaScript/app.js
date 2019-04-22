@@ -249,7 +249,7 @@ $("#searchForm").submit(function (e) {
 
 
 //wiki api
-function ajaxArticleData() {
+/* function ajaxArticleData() {
     if (inputState == null) {
         searchUrl = 'https://en.wikipedia.org/w/api.php?action=query&titles=' + slicedCurrentCity + "%" + inputCountry + '&prop=info&format=jsonfm';
     } else {
@@ -261,12 +261,11 @@ function ajaxArticleData() {
     }).then(function (response) {
         var pageElement = $('<div>');
 
-        if (response.thumbnail) pageElement.append($('<img>').attr('width', 150).attr('src', response.thumbnail.source));
+        if (response.thumbnail) pageElement.append($('<img>').attr('width', 150).attr('src', response.thumbnail.source)); */
 
-<<<<<<< HEAD
-if (slicedCurrentState === '') {
+/* if (slicedCurrentState === '') {
     function ajaxArticleData () {
-    searchUrl = 'https://en.wikipedia.org/api/rest_v1/page/summary/'  + slicedCurrentCity + "_" + slicedCurrentCountry;
+    searchUrl = 'https://en.wikipedia.org/api/rest_v1/page/summary/'  + slicedCurrentCity;
   $.ajax({
       url: searchUrl,
       method: 'GET'
@@ -276,26 +275,18 @@ if (slicedCurrentState === '') {
       if (response.thumbnail) pageElement.append($('<img>').attr('width', 150).attr('src', response.thumbnail.source));
       
       pageElement.append($('<h2>').append($('<a>').text(response.title)));
-=======
-        pageElement.append($('<h2>').append($('<a>').text(response.title)));
->>>>>>> 7480649527bdee5f147a2023c9c7a8646704edb1
 
         pageElement.append($('<p>').text(response.extract));
 
         pageElement.append($('<hr>'));
 
-<<<<<<< HEAD
       articles.prepend(pageElement);
       console.log(inputCity);
   })
-=======
-        articles.append(pageElement);
-    })
->>>>>>> 7480649527bdee5f147a2023c9c7a8646704edb1
 }
-} else {
+} else { */
     function ajaxArticleData () {
-        searchUrl = 'https://en.wikipedia.org/api/rest_v1/page/summary/'  + slicedCurrentCity + "_" + slicedCurrentState;
+        searchUrl = 'https://en.wikipedia.org/api/rest_v1/page/summary/'  + slicedCurrentCity;
       $.ajax({
           url: searchUrl,
           method: 'GET'
@@ -315,19 +306,10 @@ if (slicedCurrentState === '') {
       })
     }
 
-}
 
-<<<<<<< HEAD
 $("#searchBar").on('keyup', function(e){
   if (e.keyCode == 13) {
     ajaxArticleData();
     console.log(searchUrl);
   }
-=======
-$("#searchBar").on('keyup', function (e) {
-    if (e.keyCode == 13) {
-        ajaxArticleData();
-        console.log(inputWiki);
-    }
->>>>>>> 7480649527bdee5f147a2023c9c7a8646704edb1
 })
