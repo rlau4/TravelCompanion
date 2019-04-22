@@ -249,7 +249,7 @@ $("#searchForm").submit(function (e) {
 
 
 //wiki api
-function ajaxArticleData() {
+/* function ajaxArticleData() {
     if (inputState == null) {
         searchUrl = 'https://en.wikipedia.org/w/api.php?action=query&titles=' + slicedCurrentCity + "%" + inputCountry + '&prop=info&format=jsonfm';
     } else {
@@ -261,21 +261,55 @@ function ajaxArticleData() {
     }).then(function (response) {
         var pageElement = $('<div>');
 
-        if (response.thumbnail) pageElement.append($('<img>').attr('width', 150).attr('src', response.thumbnail.source));
+        if (response.thumbnail) pageElement.append($('<img>').attr('width', 150).attr('src', response.thumbnail.source)); */
 
-        pageElement.append($('<h2>').append($('<a>').text(response.title)));
+/* if (slicedCurrentState === '') {
+    function ajaxArticleData () {
+    searchUrl = 'https://en.wikipedia.org/api/rest_v1/page/summary/'  + slicedCurrentCity;
+  $.ajax({
+      url: searchUrl,
+      method: 'GET'
+  }).then(function(response) {
+      var pageElement = $('<div>');
+      
+      if (response.thumbnail) pageElement.append($('<img>').attr('width', 150).attr('src', response.thumbnail.source));
+      
+      pageElement.append($('<h2>').append($('<a>').text(response.title)));
 
         pageElement.append($('<p>').text(response.extract));
 
         pageElement.append($('<hr>'));
 
-        articles.append(pageElement);
-    })
+      articles.prepend(pageElement);
+      console.log(inputCity);
+  })
 }
-
-$("#searchBar").on('keyup', function (e) {
-    if (e.keyCode == 13) {
-        ajaxArticleData();
-        console.log(inputWiki);
+} else { */
+    function ajaxArticleData () {
+        searchUrl = 'https://en.wikipedia.org/api/rest_v1/page/summary/'  + slicedCurrentCity;
+      $.ajax({
+          url: searchUrl,
+          method: 'GET'
+      }).then(function(response) {
+          var pageElement = $('<div>');
+          
+          if (response.thumbnail) pageElement.append($('<img>').attr('width', 150).attr('src', response.thumbnail.source));
+          
+          pageElement.append($('<h2>').append($('<a>').text(response.title)));
+    
+          pageElement.append($('<p>').text(response.extract));
+    
+          pageElement.append($('<hr>'));
+    
+          articles.prepend(pageElement);
+          console.log(inputCity);
+      })
     }
+
+
+$("#searchBar").on('keyup', function(e){
+  if (e.keyCode == 13) {
+    ajaxArticleData();
+    console.log(searchUrl);
+  }
 })
