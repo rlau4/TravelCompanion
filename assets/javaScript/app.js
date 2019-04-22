@@ -105,7 +105,7 @@ $("#searchBar").keyup(function (e) {
         console.log(popularArr);
 
     }
-    $("#searchBar").text('');
+    // $("#searchBar").text('');
 });
 
 //populate top searches array and html list
@@ -156,15 +156,6 @@ function recentSearchClick() {
     console.log(currentDest);
     $("#searchBar").val(currentDest);
     popListPopulate();
-    map = new google.maps.Map(document.getElementById('map'), {
-        center: { lat: -34.397, lng: 150.644 },
-        zoom: 8,
-        zoomControl: true,
-        scaleControl: true,
-        fullscreenControl: false,
-    });
-    activatePlacesSearch();
-    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 }
 $(document).on("click", ".top-item", recentSearchClick);
 //Map API call
@@ -255,11 +246,9 @@ $("#searchForm").submit(function (e) {
 
 //wiki api
 function ajaxArticleData() {
-    if (inputState == null) {
-        searchUrl = 'https://en.wikipedia.org/w/api.php?action=query&titles=' + slicedCurrentCity + "%" + inputCountry + '&prop=info&format=jsonfm';
-    } else {
-        searchUrl = 'https://en.wikipedia.org/w/api.php?action=query&titles=' + slicedCurrentCity + "%" + slicedCurrentState + "%" + inputCountry + '&prop=info&format=jsonfm';
-    }
+
+        searchUrl = 'https://en.wikipedia.org/w/api.php?action=query&titles=' + slicedCurrentCity;
+    
     $.ajax({
         url: searchUrl,
         method: 'GET'
