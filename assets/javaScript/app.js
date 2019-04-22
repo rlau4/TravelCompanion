@@ -148,7 +148,7 @@ function popListPopulate() {
         var recentListsStart = mostRecentIndex - 5;
         for (i = recentListsStart; i < mostRecentIndex; i++) {
             var popularDest = $("<div>").addClass("top-item").attr("id", "city" + popularArr[i]).text(popularArr[i]);
-            $("#recent-search").append(popularDest);
+            $("#recent-search").prepend(popularDest);
         }
 
     });
@@ -173,15 +173,6 @@ function recentSearchClick() {
     console.log(currentDest);
     $("#searchBar").val(currentDest);
     popListPopulate();
-    map = new google.maps.Map(document.getElementById('map'), {
-        center: { lat: -34.397, lng: 150.644 },
-        zoom: 8,
-        zoomControl: true,
-        scaleControl: true,
-        fullscreenControl: false,
-    });
-    activatePlacesSearch();
-    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 }
 $(document).on("click", ".top-item", recentSearchClick);
 //Map API call
